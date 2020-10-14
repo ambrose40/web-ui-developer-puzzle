@@ -4,7 +4,7 @@ import { BooksDataAccessModule } from './books-data-access.module';
 describe('ShopDataAccessModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BooksDataAccessModule]
+      imports: [BooksDataAccessModule],
     }).compileComponents();
   }));
 

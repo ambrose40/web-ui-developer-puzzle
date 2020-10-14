@@ -15,7 +15,7 @@ import { ReadingListEffects } from './+state/reading-list.effects';
       fromReadingList.READING_LIST_FEATURE_KEY,
       fromReadingList.reducer
     ),
-    EffectsModule.forFeature([BooksEffects, ReadingListEffects])
-  ]
+    EffectsModule.forFeature([BooksEffects, ReadingListEffects]),
+  ],
 })
 export class BooksDataAccessModule {}

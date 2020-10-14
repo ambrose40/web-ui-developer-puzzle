@@ -12,9 +12,9 @@ describe('Books Selectors', () => {
         {
           ...initialState,
           error: 'Unknown error',
-          loaded: true
+          loaded: true,
         }
-      )
+      ),
     };
   });
 
@@ -23,7 +23,7 @@ describe('Books Selectors', () => {
       const results = BooksSelectors.getBooks(state);
 
       expect(results.length).toBe(3);
-      expect(results.map(x => x.id)).toEqual(['A', 'B', 'C']);
+      expect(results.map((x) => x.id)).toEqual(['A', 'B', 'C']);
     });
 
     it("getBooksLoaded() should return the current 'loaded' status", () => {

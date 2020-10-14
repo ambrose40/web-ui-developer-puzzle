@@ -19,8 +19,8 @@ describe('ToReadEffects', () => {
       providers: [
         ReadingListEffects,
         provideMockActions(() => actions),
-        provideMockStore()
-      ]
+        provideMockStore(),
+      ],
     });
 
     effects = TestBed.inject(ReadingListEffects);
@@ -28,11 +28,11 @@ describe('ToReadEffects', () => {
   });
 
   describe('loadReadingList$', () => {
-    it('should work', done => {
+    it('should work', (done) => {
       actions = new ReplaySubject();
       actions.next(ReadingListActions.init());
 
-      effects.loadReadingList$.subscribe(action => {
+      effects.loadReadingList$.subscribe((action) => {
         expect(action).toEqual(
           ReadingListActions.loadReadingListSuccess({ list: [] })
         );

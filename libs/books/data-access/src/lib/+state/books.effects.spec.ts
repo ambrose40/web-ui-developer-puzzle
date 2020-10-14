@@ -19,8 +19,8 @@ describe('BooksEffects', () => {
       providers: [
         BooksEffects,
         provideMockActions(() => actions),
-        provideMockStore()
-      ]
+        provideMockStore(),
+      ],
     });
 
     effects = TestBed.inject(BooksEffects);
@@ -28,11 +28,11 @@ describe('BooksEffects', () => {
   });
 
   describe('loadBooks$', () => {
-    it('should work', done => {
+    it('should work', (done) => {
       actions = new ReplaySubject();
       actions.next(BooksActions.searchBooks({ term: '' }));
 
-      effects.searchBooks$.subscribe(action => {
+      effects.searchBooks$.subscribe((action) => {
         expect(action).toEqual(
           BooksActions.searchBooksSuccess({ books: [createBook('A')] })
         );

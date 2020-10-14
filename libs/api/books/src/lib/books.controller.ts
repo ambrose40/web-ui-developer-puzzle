@@ -3,7 +3,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
-  Query
+  Query,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 
