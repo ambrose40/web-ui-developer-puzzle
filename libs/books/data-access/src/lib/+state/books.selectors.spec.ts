@@ -1,9 +1,9 @@
-import { booksAdapter, initialState } from './books.reducer';
-import * as BooksSelectors from './books.selectors';
+import { booksAdapter, BooksPartialState, initialState } from './books.reducer';
+import { getBooks, getBooksError, getBooksLoaded } from './books.selectors';
 import { createBook } from '@tmo/shared/testing';
 
 describe('Books Selectors', () => {
-  let state;
+  let state: BooksPartialState;
 
   beforeEach(() => {
     state = {
@@ -12,28 +12,28 @@ describe('Books Selectors', () => {
         {
           ...initialState,
           error: 'Unknown error',
-          loaded: true
+          loaded: true,
         }
-      )
+      ),
     };
   });
 
   describe('Books Selectors', () => {
     it('getBooks() should return the list of Books', () => {
-      const results = BooksSelectors.getBooks(state);
+      const results = getBooks(state);
 
       expect(results.length).toBe(3);
-      expect(results.map(x => x.id)).toEqual(['A', 'B', 'C']);
+      expect(results.map((x) => x.id)).toEqual(['A', 'B', 'C']);
     });
 
     it("getBooksLoaded() should return the current 'loaded' status", () => {
-      const result = BooksSelectors.getBooksLoaded(state);
+      const result = getBooksLoaded(state);
 
       expect(result).toBe(true);
     });
 
     it("getBooksError() should return the current 'error' state", () => {
-      const result = BooksSelectors.getBooksError(state);
+      const result = getBooksError(state);
 
       expect(result).toEqual('Unknown error');
     });

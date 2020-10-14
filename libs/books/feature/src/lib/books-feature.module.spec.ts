@@ -4,7 +4,7 @@ import { BooksFeatureModule } from './books-feature.module';
 describe('ShopFeatureModule', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BooksFeatureModule]
+      imports: [BooksFeatureModule],
     }).compileComponents();
   }));
 

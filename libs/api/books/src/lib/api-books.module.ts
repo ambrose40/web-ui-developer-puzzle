@@ -9,6 +9,6 @@ import { ReadingListController } from './reading-list.controller';
   imports: [HttpModule],
   controllers: [BooksController, ReadingListController],
   providers: [BooksService, ReadingListService],
-  exports: [BooksService, ReadingListService]
+  exports: [BooksService, ReadingListService],
 })
 export class ApiBooksModule {}

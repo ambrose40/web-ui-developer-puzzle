@@ -16,11 +16,11 @@ import { HttpClientModule } from '@angular/common/http';
       {
         runtimeChecks: {
           strictStateImmutability: true,
-          strictActionImmutability: true
-        }
+          strictActionImmutability: true,
+        },
       }
     ),
-    EffectsModule.forRoot([])
-  ]
+    EffectsModule.forRoot([]),
+  ],
 })
 export class SharedTestingModule {}

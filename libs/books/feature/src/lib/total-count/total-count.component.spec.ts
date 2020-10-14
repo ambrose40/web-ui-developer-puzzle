@@ -10,7 +10,7 @@ describe('TotalCountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [BooksFeatureModule, SharedTestingModule]
+      imports: [BooksFeatureModule, SharedTestingModule],
     }).compileComponents();
   }));
 

@@ -1,14 +1,29 @@
-<form [formGroup]="searchForm" (submit)="searchBooks()">
+<form
+  role="search"
+  aria-label="Books"
+  [formGroup]="searchForm"
+  (submit)="searchBooks()"
+>
   <mat-form-field floatLabel="never">
     <input
       autoFocus
       matInput
       type="search"
+      title="Search field"
+      [attr.aria-label]="'Search for ' + searchTerm + ' in books.'"
+      aria-placeholder="Search for books to add to your reading list"
+      aria-labelledby=""
       placeholder="Search for books to add to your reading list"
       formControlName="term"
     />
-    <button mat-icon-button matSuffix>
-      <mat-icon>search</mat-icon>
+    <button
+      [attr.aria-label]="'Search for ' + searchTerm + ' in books.'"
+      mat-button
+      title="Search button"
+      color="primary"
+      matSuffix
+    >
+      <mat-icon>search</mat-icon> Search
     </button>
   </mat-form-field>
 </form>
@@ -16,14 +31,19 @@
 <ng-container *ngIf="searchTerm; else empty">
   <div class="book-grid">
     <div class="book" data-testing="book-item" *ngFor="let b of books">
-      <div class="book--title">
+      <div class="book-title">
         {{ b.title }}
       </div>
-      <div class="book--content">
-        <div class="book--content--cover">
-          <img src="{{ b.coverUrl }}" />
+      <div class="book-content">
+        <div class="book-content-cover">
+          <img
+            [alt]="b.title + ' book cover illustration'"
+            [attr.aria-label]="b.title + ' book cover illustration'"
+            [title]="b.title + ' book cover illustration'"
+            src="{{ b.coverUrl }}"
+          />
         </div>
-        <div class="book--content--info">
+        <div class="book-content-info">
           <div><strong>Author:</strong> {{ b.authors.join(',') }}</div>
           <div><strong>Publisher:</strong> {{ b.publisher }}</div>
           <div>
@@ -34,6 +54,8 @@
             <button
               mat-flat-button
               color="primary"
+              [title]="'Add ' + b.title + ' to reading list.'"
+              [attr.aria-label]="'Add ' + b.title + ' to reading list.'"
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
             >
