@@ -8,10 +8,14 @@ body {
   font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
 }
-
-h1,
+h1 {
+  font-size: 48px;
+}
 h2 {
   font-size: 24px;
+}
+h1,
+h2 {
   margin: $spacing-xxs 0;
   font-weight: 300;
 }

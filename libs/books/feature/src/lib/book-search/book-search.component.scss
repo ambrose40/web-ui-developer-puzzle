@@ -22,22 +22,22 @@ form {
   background-color: $gray10;
 }
 
-.book--title {
+.book-title {
   font-weight: 500;
   color: $gray80;
   margin-bottom: $spacing-xs;
 }
 
-.book--content {
+.book-content {
   display: flex;
   flex: 1;
 }
 
-.book--content--cover {
+.book-content-cover {
   margin-right: $spacing-xxs;
 }
 
-.book--content--info {
+.book-content-info {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -61,6 +61,11 @@ form {
   }
 }
 
+.mat-button-wrapper {
+  color: $white;
+  background-color: $pink-dark;
+}
+
 .empty {
   display: flex;
   text-align: center;
@@ -68,5 +73,5 @@ form {
   justify-content: center;
   min-height: 50vh;
   font-size: 1.5rem;
-  color: $gray40;
+  color: $black;
 }

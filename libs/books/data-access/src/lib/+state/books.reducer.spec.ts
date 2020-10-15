@@ -1,12 +1,12 @@
 import { initialState, reducer, State } from './books.reducer';
-import * as BooksActions from './books.actions';
+import { searchBooksSuccess } from './books.actions';
 import { createBook } from '@tmo/shared/testing';
 
 describe('Books Reducer', () => {
   describe('valid Books actions', () => {
     it('loadBooksSuccess should return set the list of known Books', () => {
       const books = [createBook('A'), createBook('B'), createBook('C')];
-      const action = BooksActions.searchBooksSuccess({ books });
+      const action = searchBooksSuccess({ books });
 
       const result: State = reducer(initialState, action);
 

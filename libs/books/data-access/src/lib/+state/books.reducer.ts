@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Book } from '@tmo/shared/models';
 
-import * as BooksActions from './books.actions';
+import { searchBooks, searchBooksFailure, searchBooksSuccess, clearSearch } from './books.actions';
 
 export const BOOKS_FEATURE_KEY = 'books';
 
@@ -19,28 +19,28 @@ export interface BooksPartialState {
 export const booksAdapter: EntityAdapter<Book> = createEntityAdapter<Book>();
 
 export const initialState: State = booksAdapter.getInitialState({
-  loaded: false
+  loaded: false,
 });
 
 const booksReducer = createReducer(
   initialState,
-  on(BooksActions.searchBooks, (state, { term }) => ({
+  on(searchBooks, (state, { term }) => ({
     ...state,
     searchTerm: term,
     loaded: false,
-    error: null
+    error: null,
   })),
-  on(BooksActions.searchBooksSuccess, (state, action) =>
+  on(searchBooksSuccess, (state, action) =>
     booksAdapter.setAll(action.books, {
       ...state,
-      loaded: true
+      loaded: true,
     })
   ),
-  on(BooksActions.searchBooksFailure, (state, { error }) => ({
+  on(searchBooksFailure, (state, { error }) => ({
     ...state,
-    error
+    error,
   })),
-  on(BooksActions.clearSearch, state => booksAdapter.removeAll(state))
+  on(clearSearch, (state) => booksAdapter.removeAll(state))
 );
 
 export function reducer(state: State | undefined, action: Action) {

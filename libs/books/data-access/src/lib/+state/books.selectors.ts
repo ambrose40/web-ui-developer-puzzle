@@ -3,7 +3,7 @@ import {
   BOOKS_FEATURE_KEY,
   booksAdapter,
   BooksPartialState,
-  State
+  State,
 } from './books.reducer';
 
 export const getBooksState = createFeatureSelector<BooksPartialState, State>(

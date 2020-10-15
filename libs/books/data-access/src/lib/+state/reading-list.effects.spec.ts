@@ -6,7 +6,10 @@ import { HttpTestingController } from '@angular/common/http/testing';
 
 import { SharedTestingModule } from '@tmo/shared/testing';
 import { ReadingListEffects } from './reading-list.effects';
-import * as ReadingListActions from './reading-list.actions';
+import {
+  init as ReadingListActionsInit,
+  loadReadingListSuccess,
+} from './reading-list.actions';
 
 describe('ToReadEffects', () => {
   let actions: ReplaySubject<any>;
@@ -19,8 +22,8 @@ describe('ToReadEffects', () => {
       providers: [
         ReadingListEffects,
         provideMockActions(() => actions),
-        provideMockStore()
-      ]
+        provideMockStore(),
+      ],
     });
 
     effects = TestBed.inject(ReadingListEffects);
@@ -28,14 +31,12 @@ describe('ToReadEffects', () => {
   });
 
   describe('loadReadingList$', () => {
-    it('should work', done => {
+    it('should work', (done) => {
       actions = new ReplaySubject();
-      actions.next(ReadingListActions.init());
+      actions.next(ReadingListActionsInit());
 
-      effects.loadReadingList$.subscribe(action => {
-        expect(action).toEqual(
-          ReadingListActions.loadReadingListSuccess({ list: [] })
-        );
+      effects.loadReadingList$.subscribe((action) => {
+        expect(action).toEqual(loadReadingListSuccess({ list: [] }));
         done();
       });
 

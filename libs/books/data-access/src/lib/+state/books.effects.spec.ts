@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { HttpTestingController } from '@angular/common/http/testing';
+import { createBook, SharedTestingModule } from '@tmo/shared/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { ReplaySubject } from 'rxjs';
-import { createBook, SharedTestingModule } from '@tmo/shared/testing';
+import { TestBed } from '@angular/core/testing';
 
+import { searchBooks, searchBooksSuccess } from './books.actions';
 import { BooksEffects } from './books.effects';
-import * as BooksActions from './books.actions';
-import { HttpTestingController } from '@angular/common/http/testing';
 
 describe('BooksEffects', () => {
   let actions: ReplaySubject<any>;
@@ -19,8 +19,8 @@ describe('BooksEffects', () => {
       providers: [
         BooksEffects,
         provideMockActions(() => actions),
-        provideMockStore()
-      ]
+        provideMockStore(),
+      ],
     });
 
     effects = TestBed.inject(BooksEffects);
@@ -28,13 +28,13 @@ describe('BooksEffects', () => {
   });
 
   describe('loadBooks$', () => {
-    it('should work', done => {
+    it('should work', (done) => {
       actions = new ReplaySubject();
-      actions.next(BooksActions.searchBooks({ term: '' }));
+      actions.next(searchBooks({ term: '' }));
 
-      effects.searchBooks$.subscribe(action => {
+      effects.searchBooks$.subscribe((action) => {
         expect(action).toEqual(
-          BooksActions.searchBooksSuccess({ books: [createBook('A')] })
+          searchBooksSuccess({ books: [createBook('A')] })
         );
         done();
       });
