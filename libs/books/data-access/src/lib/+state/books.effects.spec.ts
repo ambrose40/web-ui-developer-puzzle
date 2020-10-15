@@ -32,7 +32,8 @@ describe('BooksEffects', () => {
       actions = new ReplaySubject();
       actions.next(searchBooks({ term: '' }));
 
-      effects.searchBooks$.subscribe((action) => {
+      effects.searchBooks$
+      .subscribe((action) => {
         expect(action).toEqual(
           searchBooksSuccess({ books: [createBook('A')] })
         );
