@@ -3,6 +3,7 @@ import { createBook, SharedTestingModule } from '@tmo/shared/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { ReplaySubject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { TestBed } from '@angular/core/testing';
 
 import { searchBooks, searchBooksSuccess } from './books.actions';
@@ -32,7 +33,9 @@ describe('BooksEffects', () => {
       actions = new ReplaySubject();
       actions.next(searchBooks({ term: '' }));
 
-      effects.searchBooks$.subscribe((action) => {
+      effects.searchBooks$
+      .pipe(debounceTime(500))
+      .subscribe((action) => {
         expect(action).toEqual(
           searchBooksSuccess({ books: [createBook('A')] })
         );

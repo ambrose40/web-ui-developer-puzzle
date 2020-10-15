@@ -2,12 +2,12 @@
   role="search"
   aria-label="Books"
   [formGroup]="searchForm"
-  (submit)="searchBooks()"
 >
   <mat-form-field floatLabel="never">
     <input
       autoFocus
       matInput
+      (keyup)="searchBooks()"
       type="search"
       title="Search field"
       [attr.aria-label]="'Search for ' + searchTerm + ' in books.'"
