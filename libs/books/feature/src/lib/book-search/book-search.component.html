@@ -2,12 +2,13 @@
   role="search"
   aria-label="Books"
   [formGroup]="searchForm"
-  (submit)="searchBooks()"
 >
   <mat-form-field floatLabel="never">
     <input
       autoFocus
       matInput
+      [ngModel]="term"
+      (ngModelChange)="change($event)"
       type="search"
       title="Search field"
       [attr.aria-label]="'Search in books.'"
