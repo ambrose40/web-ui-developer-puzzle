@@ -52,6 +52,7 @@
           <p [innerHTML]="b.description"></p>
           <div>
             <button
+              data-testing="want-to-read-button"
               mat-flat-button
               color="primary"
               [title]="'Add ' + b.title + ' to reading list.'"
@@ -59,7 +60,7 @@
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
             >
-              Want to Read
+              {{ getButtonText(b) }}
             </button>
           </div>
         </div>

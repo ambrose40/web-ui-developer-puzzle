@@ -7,12 +7,15 @@ import { ReadingListItem } from '@tmo/shared/models';
 import {
   addToReadingList,
   confirmedAddToReadingList,
+  confirmedMarkAsFinished,
   confirmedRemoveFromReadingList,
   failedAddToReadingList,
+  failedMarkAsFinished,
   failedRemoveFromReadingList,
   init as ReadingListActionsInit,
   loadReadingListError,
   loadReadingListSuccess,
+  markAsFinished,
   removeFromReadingList,
 } from './reading-list.actions';
 
@@ -49,6 +52,18 @@ export class ReadingListEffects implements OnInitEffects {
         this.http.delete(`/api/reading-list/${item.bookId}`).pipe(
           map(() => confirmedRemoveFromReadingList({ item })),
           catchError(() => of(failedRemoveFromReadingList({ item })))
+        )
+      )
+    )
+  );
+
+  finishBook$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(markAsFinished),
+      concatMap(({ item }) =>
+        this.http.get(`/api/reading-list/${item.bookId}/finished`).pipe(
+          map(() => confirmedMarkAsFinished({ item })),
+          catchError(() => of(failedMarkAsFinished({ item })))
         )
       )
     )

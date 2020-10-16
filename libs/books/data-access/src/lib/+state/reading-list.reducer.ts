@@ -7,8 +7,10 @@ import {
   loadReadingListSuccess,
   loadReadingListError,
   removeFromReadingList,
+  markAsFinished,
 } from './reading-list.actions';
 import { ReadingListItem } from '@tmo/shared/models';
+import { Update } from '@ngrx/entity/src/models';
 
 export const READING_LIST_FEATURE_KEY = 'readingList';
 
@@ -58,7 +60,17 @@ const readingListReducer = createReducer(
   ),
   on(removeFromReadingList, (state, action) =>
     readingListAdapter.removeOne(action.item.bookId, state)
-  )
+  ),
+  on(markAsFinished, (state, action) => {
+    const todoUpdate: Update<ReadingListItem> = {
+      id: action.item.bookId,
+      changes: {
+        finished: !action.item.finished,
+        finishedDate: action.item.finished ? '' : new Date().toISOString(),
+      },
+    };
+    return readingListAdapter.updateOne(todoUpdate, state);
+  })
 );
 
 export function reducer(state: State | undefined, action: Action) {
