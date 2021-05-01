@@ -15,7 +15,7 @@ import { ReadingListComponent } from './reading-list/reading-list.component';
 const EXPORTS = [
   BookSearchComponent,
   TotalCountComponent,
-  ReadingListComponent
+  ReadingListComponent,
 ];
 
 @NgModule({
@@ -29,11 +29,11 @@ const EXPORTS = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: BookSearchComponent }
+      { path: '', pathMatch: 'full', component: BookSearchComponent },
     ]),
-    BooksDataAccessModule
+    BooksDataAccessModule,
   ],
   exports: [...EXPORTS],
-  declarations: [...EXPORTS]
+  declarations: [...EXPORTS],
 })
 export class BooksFeatureModule {}

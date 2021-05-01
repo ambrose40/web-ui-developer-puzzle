@@ -1,7 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
-import * as ReadingListActions from './reading-list.actions';
+import {
+  addToReadingList,
+  init as ReadingListActionsInit,
+  loadReadingListSuccess,
+  loadReadingListError,
+  removeFromReadingList,
+} from './reading-list.actions';
 import { ReadingListItem } from '@tmo/shared/models';
 
 export const READING_LIST_FEATURE_KEY = 'readingList';
@@ -18,39 +24,39 @@ export interface ReadingListPartialState {
 export const readingListAdapter: EntityAdapter<ReadingListItem> = createEntityAdapter<
   ReadingListItem
 >({
-  selectId: item => item.bookId
+  selectId: (item) => item.bookId,
 });
 
 export const initialState: State = readingListAdapter.getInitialState({
   loaded: false,
-  error: null
+  error: null,
 });
 
 const readingListReducer = createReducer(
   initialState,
-  on(ReadingListActions.init, state => {
+  on(ReadingListActionsInit, (state) => {
     return {
       ...state,
       loaded: false,
-      error: null
+      error: null,
     };
   }),
-  on(ReadingListActions.loadReadingListSuccess, (state, action) => {
+  on(loadReadingListSuccess, (state, action) => {
     return readingListAdapter.setAll(action.list, {
       ...state,
-      loaded: true
+      loaded: true,
     });
   }),
-  on(ReadingListActions.loadReadingListError, (state, action) => {
+  on(loadReadingListError, (state, action) => {
     return {
       ...state,
-      error: action.error
+      error: action.error,
     };
   }),
-  on(ReadingListActions.addToReadingList, (state, action) =>
+  on(addToReadingList, (state, action) =>
     readingListAdapter.addOne({ bookId: action.book.id, ...action.book }, state)
   ),
-  on(ReadingListActions.removeFromReadingList, (state, action) =>
+  on(removeFromReadingList, (state, action) =>
     readingListAdapter.removeOne(action.item.bookId, state)
   )
 );
