@@ -1,7 +1,10 @@
 import {
+  addToReadingList,
   failedAddToReadingList,
   failedRemoveFromReadingList,
   loadReadingListSuccess,
+  markAsFinished,
+  removeFromReadingList,
 } from './reading-list.actions';
 import {
   initialState,
@@ -54,6 +57,56 @@ describe('Books Reducer', () => {
       const result: State = reducer(state, action);
 
       expect(result.ids).toEqual(['A', 'B']);
+    });
+
+    it('addToReadingList should add book to reading list', () => {
+      const action = addToReadingList({
+        book: createBook('C'),
+      });
+
+      const result: State = reducer(state, action);
+
+      expect(result.ids).toEqual(['A', 'B', 'C']);
+    });
+
+    it('removeFromReadingList should remove book from reading list', () => {
+      const action = removeFromReadingList({
+        item: createReadingListItem('B'),
+      });
+
+      const result: State = reducer(state, action);
+
+      expect(result.ids).toEqual(['A']);
+    });
+
+    it('markAsFinished should mark book as finished', () => {
+      const action = markAsFinished({
+        item: createReadingListItem('A'),
+      });
+
+      const result: State = reducer(state, action);
+      const [first] = Object.values(result.entities);
+      expect(first.finished).toBe(true);
+      expect(result.ids).toEqual(['A', 'B']);
+    });
+
+    it('markAsFinished should unmark book as finished', () => {
+      const mark = markAsFinished({
+        item: createReadingListItem('A'),
+      });
+
+      const resultMark: State = reducer(state, mark);
+      const [first] = Object.values(resultMark.entities);
+      expect(first.finished).toBe(true);
+      expect(resultMark.ids).toEqual(['A', 'B']);
+      const unmark = markAsFinished({
+        item: first,
+      });
+
+      const resultUnmark: State = reducer(state, unmark);
+      const [second] = Object.values(resultUnmark.entities);
+      expect(second.finished).toBe(false);
+      expect(resultUnmark.ids).toEqual(['A', 'B']);
     });
   });
 

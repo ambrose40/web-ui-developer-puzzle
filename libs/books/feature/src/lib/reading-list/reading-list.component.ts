@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getReadingList, removeFromReadingList } from '@tmo/books/data-access';
+import {
+  getReadingList,
+  markAsFinished,
+  removeFromReadingList,
+} from '@tmo/books/data-access';
+import { ReadingListItem } from '@tmo/shared/models';
 
 @Component({
   selector: 'tmo-reading-list',
@@ -12,7 +17,25 @@ export class ReadingListComponent {
 
   constructor(private readonly store: Store) {}
 
-  removeFromReadingList(item) {
+  removeFromReadingList(item: ReadingListItem) {
     this.store.dispatch(removeFromReadingList({ item }));
+  }
+
+  markAsFinished(item: ReadingListItem) {
+    this.store.dispatch(markAsFinished({ item }));
+  }
+
+  getFinishedButtonColor(item: ReadingListItem) {
+    return item.finished ? 'accent' : 'primary';
+  }
+
+  formatISODate(strDate: string) {
+    return strDate.substring(0, 10);
+  }
+
+  finishedText(item: ReadingListItem) {
+    return item.finished
+      ? 'Reading complete: ' + this.formatISODate(item.finishedDate)
+      : 'Not yet read';
   }
 }
