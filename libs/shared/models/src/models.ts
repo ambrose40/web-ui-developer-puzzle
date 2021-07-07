@@ -13,3 +13,5 @@ export interface ReadingListItem extends Omit<Book, 'id'> {
   finished?: boolean;
   finishedDate?: string;
 }
+
+export const UNDO_DURATION = 7000;
