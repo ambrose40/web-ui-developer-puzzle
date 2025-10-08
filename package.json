@@ -37,7 +37,7 @@
     "@angular/forms": "^10.0.10",
     "@angular/material": "9.2.2",
     "@angular/platform-browser": "^10.0.10",
-    "@angular/platform-browser-dynamic": "^10.0.10",
+    "@angular/platform-browser-dynamic": "^20.3.0",
     "@angular/router": "^10.0.10",
     "@nestjs/common": "^7.6.5",
     "@nestjs/core": "^7.0.0",
